@@ -2035,9 +2035,10 @@ expo-task-manager@~1.0.0:
     expo-errors "~1.0.0"
     expo-task-manager-interface "~1.0.0"
 
-expo@^32.0.1:
+expo@^32.0.0:
   version "32.0.1"
   resolved "https://registry.yarnpkg.com/expo/-/expo-32.0.1.tgz#6b6eab63afd0fb4a7b8ca06de3f0f408f8c4ae6b"
+  integrity sha512-1oJPx3xjcjIcMZmQ8cuxnuaBe62miC+QrCqjtQgmErBJQG4jY3r2LP5l1pPoY42nR3zV8czhlvW9kx39sdunNw==
   dependencies:
     "@babel/runtime" "^7.1.2"
     "@expo/vector-icons" "github:expo/vector-icons#expo-font-fix"
