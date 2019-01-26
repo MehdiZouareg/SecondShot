@@ -1,7 +1,7 @@
 import React, {  Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Sound , Math} from 'react-native';
+import { AppRegistry,  Button, Platform, StyleSheet, View, Image, ImageBackground, TouchableOpacity, Sound } from 'react-native';
 import { Font } from 'expo';
-import collection from './assets/index'
+import collection from './assets/index';
 
 class BackgroundImage extends Component {
 
@@ -30,54 +30,55 @@ class FallingObject extends Component {
 
 export default class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state= {
-      text: "Clic !",
-      backgroundColor: "#0F0",
-      playing: false
-    }
-  }
 
-  componentDidMount() {
-      Font.loadAsync({
-        'geek': require('./assets/fonts/geek.ttf'),
-      });
-    }
+    Load_New_Image=()=>{
 
-  togglePlaying() {
-    this.setState({
-      playing: true
-    })
-  }
+        let RandomNumber = Math.floor(Math.random() * 100) + 1 ;
+        let outcome = collection[Math.floor(Math.random(RandomNumber))];
 
-  getRandomGif()
-  {
-    const min = 1;
-    const max = 100;
-    const rand = min * (max - min);
+        console.log(outcome);
+        this.setState({
 
-    console.log(collection);
-    var required = collection['mario'];
-    return required;
-  }
+            currentGif :  require('./assets/MarioKart.gif')
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <BackgroundImage>
-        <TouchableOpacity style={styles.touchableImage} onPress={() =>
-            this.getRandomGif()
-          }>
-          <Image style={styles.bloc} source={require('./assets/Bloc.png')}/>
-        </TouchableOpacity>
-        <View style={styles.character}>
-            <Image style={styles.characterRender} source={this.getRandomGif()}/>
-        </View>
-        </BackgroundImage>
-      </View>
-    );
-  }
+        });
+    };
+
+
+      constructor(props) {
+        super(props);
+        this.state = {
+          text: "Clic !",
+          backgroundColor: "#0F0",
+          playing: false,
+          currentGif:  require('./assets/PeachKart.gif')
+        }
+      }
+
+      componentDidMount() {
+          Font.loadAsync({
+            'geek': require('./assets/fonts/geek.ttf'),
+          });
+        }
+
+
+      render() {
+        return (
+          <View style={styles.container}>
+            <BackgroundImage>
+            <TouchableOpacity style={styles.touchableImage} onPress={() => {
+                this.Load_New_Image();
+                }
+              }>
+              <Image style={styles.bloc} source={require('./assets/Bloc.png')}/>
+            </TouchableOpacity>
+            <View style={styles.character}>
+                <Image style={styles.characterRender} source={ this.state.currentGif }/>
+            </View>
+            </BackgroundImage>
+          </View>
+        );
+      }
 }
 
 const styles = StyleSheet.create({
