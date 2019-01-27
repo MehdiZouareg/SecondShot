@@ -1,6 +1,7 @@
 import React, {  Component } from 'react';
 import { AppRegistry,  Button, Platform, StyleSheet, View, Image, ImageBackground, TouchableOpacity, Sound } from 'react-native';
 import { Font } from 'expo';
+import styles from './assets/styles';
 import collection from './assets/index';
 
 class BackgroundImage extends Component {
@@ -14,6 +15,8 @@ class BackgroundImage extends Component {
         )
     }
 }
+
+
 
 class FallingObject extends Component {
 
@@ -30,18 +33,34 @@ class FallingObject extends Component {
 
 export default class App extends Component {
 
+    prevGif = 0;
 
     Load_New_Image=()=>{
 
-        let RandomNumber = Math.floor(Math.random() * 100) + 1 ;
-        let outcome = collection[Math.floor(Math.random(RandomNumber))];
+        let go = false;
+        let centralOutcome = null;
+        let buttonOutcome = null;
+        let RandomNumber = null;
 
-        console.log(outcome);
+        while(!go){
+            RandomNumber = Math.floor(Math.random() * collection.length) ;
+            centralOutcome = collection[RandomNumber];
+            buttonOutcome = collection[RandomNumber];
+
+            console.log(RandomNumber);
+
+            if(RandomNumber !== this.prevGif)
+            {
+                go = true;
+            }
+        }
+
         this.setState({
-
-            currentGif :  require('./assets/MarioKart.gif')
-
+            currentCentralGif : centralOutcome,
+            currentButtonPic: buttonOutcome
         });
+
+        this.prevGif = RandomNumber;
     };
 
 
@@ -51,7 +70,7 @@ export default class App extends Component {
           text: "Clic !",
           backgroundColor: "#0F0",
           playing: false,
-          currentGif:  require('./assets/PeachKart.gif')
+          currentCentralGif:  require('./assets/PeachKart.gif')
         }
       }
 
@@ -66,14 +85,18 @@ export default class App extends Component {
         return (
           <View style={styles.container}>
             <BackgroundImage>
+
             <TouchableOpacity style={styles.touchableImage} onPress={() => {
                 this.Load_New_Image();
                 }
               }>
-              <Image style={styles.bloc} source={require('./assets/Bloc.png')}/>
+              <Image style={styles.bloc} source={require('./assets/cry.gif')}/>
             </TouchableOpacity>
+
+
+
             <View style={styles.character}>
-                <Image style={styles.characterRender} source={ this.state.currentGif }/>
+                <Image style={styles.characterRender} source={ this.state.currentCentralGif }/>
             </View>
             </BackgroundImage>
           </View>
@@ -81,71 +104,3 @@ export default class App extends Component {
       }
 }
 
-const styles = StyleSheet.create({
-    backgroundImage: {
-        flex: 2,
-        width: null,
-        height: null,
-        resizeMode: 'cover'
-    },
-
-    touchableImage: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      resizeMode: 'contain',
-      marginTop: -100,
-    },
-
-    bloc: {
-      width: 80,
-      height: 80,
-      justifyContent: 'center',
-      resizeMode: 'contain',
-    },
-
-    character: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      resizeMode: 'contain',
-      marginTop: -200,
-    },
-
-    characterRender: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: 80,
-      height: 80,
-    },
-
-    text: {
-        width: 'auto',
-        height: 50,
-        color: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: 0
-    },
-
-    bottomView:{
-      width: '100%',
-      height: '25%',
-      backgroundColor: '#000',
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'absolute',
-      bottom: 0
-    },
-
-    textStyle:{
-      color: '#fff',
-      fontSize:45
-    },
-
-    container: {
-     flex: 1,
-     paddingTop: 22
-    },
-});

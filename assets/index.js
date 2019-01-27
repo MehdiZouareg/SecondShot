@@ -1,12 +1,13 @@
 
+let luigi =  require('./LuigiKart.gif');
+let mario =  require('./MarioKart.gif');
+let peach =  require('./PeachKart.gif');
 
-let luigi = './assets/LuigiKart.gif';
-let mario =  './assets/MarioKart.gif';
-let peach =  './assets/PeachKart.gif';
-
-export default collection = [
+collectionCentralGif = [
     mario,
     peach,
     luigi,
 ]
+
+export default collectionCentralGif
 ;
