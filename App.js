@@ -4,19 +4,35 @@ import { Font } from 'expo';
 import styles from './assets/styles';
 import collection from './assets/index';
 
+
 class BackgroundImage extends Component {
-
-    render() {
-        return (
-            <ImageBackground source={require('./assets/7SYH.gif')}
-                  style={styles.backgroundImage}>
-                  {this.props.children}
-            </ImageBackground>
-        )
-    }
+  render() {
+    return (
+      <ImageBackground
+        source={require("./assets/7SYH.gif")}
+        style={styles.backgroundImage}
+      >
+        {this.props.children}
+      </ImageBackground>
+    );
+  }
 }
+class Mycomponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      check: this.props.check
+    };
+  }
+  displayText(){
+    return {
 
-
+    }
+  }
+  render() {
+    return <Text>{this.props.check ? "oui":"non"}</Text>;
+  }
+}
 
 class FallingObject extends Component {
 
